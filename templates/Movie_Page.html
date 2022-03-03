@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Movies</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style>
+        .movie_table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body onload="showMovies({{ MOVIES }})">
 
