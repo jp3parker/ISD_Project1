@@ -1,0 +1,113 @@
+@font-face {
+    font-family: "MontSerrat";
+    src: url(../data/Montserrat-Regular.ttf);
+}
+
+body{
+    margin: 0;
+    color: white;
+    background-image: url("https://i.pinimg.com/originals/69/3b/b8/693bb8db1380f20f196c83bccbc16aab.png");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.inner_header{
+    display: block;
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.decoration_pic_left{
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+.logo_container .decoration_pic_right{
+    width: 25%;
+    height: 100%;
+    float: right;
+}
+
+.logo_container .decoration_pic_left{
+    margin: 0 auto;
+    display: table;
+    height: 10%;
+    text-align: center;
+    font-family: "MontSerrat", sans-serif;
+}
+
+.logo_container h1{
+    text-align: center;
+    font-size: 30px;
+}
+
+.intro{
+    /*margin: 0 auto;*/
+    /*width: 100%;*/
+    /*height: 35%;*/
+    display: flex;
+}
+
+.description{
+    margin: 0 0 0 0;
+    width: 50%;
+    height: 35%;
+    display: block;
+    float: right;
+    text-align: center;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: #111111;
+    font-family: "MontSerrat", sans-serif;
+}
+
+.poster{
+    width: 50%;
+    height: 20%;
+    display: block;
+    float: left;
+    margin: 0;
+}
+
+.filler{
+    margin: 0;
+    width: 100%;
+    height: 40%;
+    background-color: #111111;
+    display: flex;
+    /*padding-top: 1%;*/
+    padding-bottom: 2%;
+    border-radius: 5px;
+}
+
+.movie_table, th, td{
+    border: 1px solid white;
+}
+
+.inner{
+    /*width: 1000px;*/
+    width: 75%;
+    height: 100%;
+    background-color: #111111;
+    margin: 0 auto;
+}
+
+.initial_button{
+    border-radius: 25px;
+    margin: 2% 13%;
+    width: 74%;
+    font-size: 36px;
+    background-color: #711324;
+    font-family:MontSerrat,serif;
+    color:white;
+    font-weight: 200;
+}
+
+hr.under_logo{
+    border-top: 1px dashed white;
+    width: 100%;
+    margin-block-end: 0;
+}

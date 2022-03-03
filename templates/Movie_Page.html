@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body onload="showMovies({{ MOVIES }})">
+
+<table id="movie_table" class="movie_table">
+
+</table>
+
+<script>
+
+    function showMovies(data) {
+        let table = document.getElementById("movie_table");
+        for(let i=data.length-1; i>=0; --i) {
+            let row = document.createElement("tr");
+
+            let nameCell = document.createElement("td");
+            nameCell.textContent = data[i].title;
+            row.appendChild(nameCell);
+
+            let yearCell = document.createElement("td");
+            yearCell.textContent = data[i].year;
+            row.appendChild(yearCell);
+
+            let castCell = document.createElement("td");
+            if(data[i].cast.length) {
+                castCell.textContent = data[i].cast[0];
+                for(let j=1; j<data[i].cast.length; ++j) {
+                    castCell.textContent+=(", " + data[i].cast[j]);
+                }
+            }
+            row.appendChild(castCell);
+
+            let genresCell = document.createElement("td");
+            if(data[i].genres.length) {
+                genresCell.textContent = data[i].genres[0];
+                for(let j=1; j<data[i].genres.length; ++j) {
+                    genresCell.textContent+=(", " + data[i].genres[j]);
+                }
+            }
+            row.appendChild(genresCell);
+
+            table.appendChild(row)
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
