@@ -75,7 +75,7 @@ body{
     height: 40%;
     background-color: #111111;
     display: flex;
-    /*padding-top: 1%;*/
+    padding-top: 1%;
     padding-bottom: 2%;
     border-radius: 5px;
 }
