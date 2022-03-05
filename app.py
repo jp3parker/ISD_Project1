@@ -1,6 +1,8 @@
 from flask import Flask, render_template, json
 import codecs
 
+#test
+
 app = Flask(__name__)
 
 with codecs.open("static/data/movies.json", "r", encoding="utf-8") as moviesFile:
