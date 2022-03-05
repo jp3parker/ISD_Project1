@@ -11,13 +11,86 @@
 </head>
 <body onload="showMovies({{ MOVIES }})">
 
+<select id="sort_select">
+    <option value="alpha">Alphabetically by Title</option>
+    <option value="new">Newest to Oldest</option>
+    <option value="old">Oldest to Newest</option>
+</select>
+
+<button onclick="sortData({{ MOVIES }})">
+    <h1>SORT</h1>
+</button>
+
+
 <table id="movie_table" class="movie_table">
 </table>
 
 <script>
+    function compareTitle( a, b ) {
+        if ( a.title > b.title) {
+            return -1;
+        }
+        if ( a.title < b.title ){
+            return 1;
+        }
+        return 0;
+    }
+
+    function compareYears_new( a, b) {
+        if ( a.year < b.year) {
+            return -1;
+        }
+        if ( a.year > b.year ){
+            return 1;
+        }
+        return 0;
+    }
+
+    function compareYears_old( a, b) {
+        if ( a.year > b.year) {
+            return -1;
+        }
+        if ( a.year < b.year ){
+            return 1;
+        }
+        return 0;
+    }
+
+    function sortData(data) {
+        let select = document.getElementById("sort_select");
+        console.log(select.options[select.selectedIndex].textContent);
+
+        let selected_option = select.options[select.selectedIndex].value;
+        switch (selected_option) {
+            case "alpha": {
+                data.sort(compareTitle);
+                showMovies(data);
+                break;
+            }
+            case "new": {
+                data.sort(compareYears_new);
+                showMovies(data);
+                break;
+            }
+            case "old": {
+                data.sort(compareYears_old);
+                showMovies(data);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
+    }
 
     function showMovies(data) {
         let table = document.getElementById("movie_table");
+
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+
         for(let i=data.length-1; i>=0; --i) {
             let row = document.createElement("tr");
 
@@ -46,10 +119,22 @@
                 }
             }
             row.appendChild(genresCell);
-
             table.appendChild(row)
         }
-
+        let firstRow = document.createElement("tr");
+        let name = document.createElement("td");
+        name.textContent = "Name:";
+        firstRow.appendChild(name);
+        let year = document.createElement("td");
+        year.textContent = "Year:";
+        firstRow.appendChild(year)
+        let cast = document.createElement("td");
+        cast.textContent = "Cast:";
+        firstRow.appendChild(cast);
+        let genre = document.createElement("td");
+        genre.textContent = "Genres:";
+        firstRow.appendChild(genre);
+        table.prepend(firstRow);
     }
 
 </script>
