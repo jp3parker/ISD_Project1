@@ -55,6 +55,10 @@
             nameCell.textContent = actors[i];
             row.appendChild(nameCell);
 
+            row.onclick = function() {
+                console.log(row.firstChild.textContent);
+            }
+
             table.appendChild(row);
         }
         const row = document.createElement("tr");
@@ -64,7 +68,6 @@
         table.prepend(row);
 
     }
-
 
 </script>
 
