@@ -3,11 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Actors</title>
+    <style>
+        .actor_table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
-<body>
+<body onload="loadData({{ MOVIES }})">
 
-<p>haven't added anything yet</p>
+<table id="actors_table" class="actor_table">
 
+</table>
+
+<script>
+
+    let data = [];
+    let actors = [];
+    let numOfMovies = [];
+    function loadData(movieData) {
+        data = movieData;
+        for(let i=0; i<data.length; ++i) {
+            for(let j=0; j<data[i].cast.length; ++j) {
+                const index = actors.indexOf(data[i].cast[j]);
+                if(index == -1) { //not found
+                    actors.push(data[i].cast[j]);
+                    numOfMovies.push(1);
+                }
+                else {
+                    ++numOfMovies[index];
+                }
+            }
+        }
+        showActors();
+    }
+
+    function showActors() {
+        const table = document.getElementById("actors_table");
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+        for(let i=0; i<actors.length; ++i) {
+            const row = document.createElement("tr");
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = actors[i];
+            row.appendChild(nameCell);
+
+            const movieNumber = document.createElement("td");
+            movieNumber.textContent = numOfMovies[i];
+            row.appendChild(movieNumber);
+
+            table.appendChild(row);
+        }
+        const row = document.createElement("tr");
+        const name = document.createElement("td");
+        name.textContent = "Actors name:";
+        row.appendChild(name);
+        const number = document.createElement("td");
+        number.textContent = "Number of Movies:";
+        row.appendChild(number);
+        table.prepend(row);
+
+    }
+
+
+</script>
 
 </body>
 </html>

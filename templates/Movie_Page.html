@@ -9,7 +9,7 @@
         }
     </style>
 </head>
-<body onload="showMovies({{ MOVIES }})">
+<body onload="loadData({{ MOVIES }})">
 
 <select id="sort_select">
     <option value="alpha">Alphabetically by Title</option>
@@ -26,6 +26,13 @@
 </table>
 
 <script>
+
+    let data = [];
+    function loadData(movieData) {
+        data = movieData;
+        showMovies();
+    }
+
     function compareTitle( a, b ) {
         if ( a.title > b.title) {
             return -1;
@@ -36,7 +43,7 @@
         return 0;
     }
 
-    function compareYears_new( a, b) {
+    function compareYears_new(a, b) {
         if ( a.year < b.year) {
             return -1;
         }
@@ -56,11 +63,9 @@
         return 0;
     }
 
-    function sortData(data) {
-        let select = document.getElementById("sort_select");
-        console.log(select.options[select.selectedIndex].textContent);
-
-        let selected_option = select.options[select.selectedIndex].value;
+    function sortData() {
+        const select = document.getElementById("sort_select");
+        const selected_option = select.options[select.selectedIndex].value;
         switch (selected_option) {
             case "alpha": {
                 data.sort(compareTitle);
@@ -84,25 +89,25 @@
 
     }
 
-    function showMovies(data) {
-        let table = document.getElementById("movie_table");
+    function showMovies() {
+        const table = document.getElementById("movie_table");
 
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
 
         for(let i=data.length-1; i>=0; --i) {
-            let row = document.createElement("tr");
+            const row = document.createElement("tr");
 
-            let nameCell = document.createElement("td");
+            const nameCell = document.createElement("td");
             nameCell.textContent = data[i].title;
             row.appendChild(nameCell);
 
-            let yearCell = document.createElement("td");
+            const yearCell = document.createElement("td");
             yearCell.textContent = data[i].year;
             row.appendChild(yearCell);
 
-            let castCell = document.createElement("td");
+            const castCell = document.createElement("td");
             if(data[i].cast.length) {
                 castCell.textContent = data[i].cast[0];
                 for(let j=1; j<data[i].cast.length; ++j) {
@@ -111,7 +116,7 @@
             }
             row.appendChild(castCell);
 
-            let genresCell = document.createElement("td");
+            const genresCell = document.createElement("td");
             if(data[i].genres.length) {
                 genresCell.textContent = data[i].genres[0];
                 for(let j=1; j<data[i].genres.length; ++j) {
@@ -121,17 +126,17 @@
             row.appendChild(genresCell);
             table.appendChild(row)
         }
-        let firstRow = document.createElement("tr");
-        let name = document.createElement("td");
+        const firstRow = document.createElement("tr");
+        const name = document.createElement("td");
         name.textContent = "Name:";
         firstRow.appendChild(name);
-        let year = document.createElement("td");
+        const year = document.createElement("td");
         year.textContent = "Year:";
         firstRow.appendChild(year)
-        let cast = document.createElement("td");
+        const cast = document.createElement("td");
         cast.textContent = "Cast:";
         firstRow.appendChild(cast);
-        let genre = document.createElement("td");
+        const genre = document.createElement("td");
         genre.textContent = "Genres:";
         firstRow.appendChild(genre);
         table.prepend(firstRow);
