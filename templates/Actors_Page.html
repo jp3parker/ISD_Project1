@@ -4,16 +4,51 @@
     <meta charset="UTF-8">
     <title>Actors</title>
     <style>
+        body{
+            display: flex;
+        }
         .actor_table, th, td {
+            overflow-y: scroll;
             border: 1px solid black;
+            width: 50%;
+            margin: 0;
+            border-collapse: collapse;
+        }
+        .card {
+            /* Add shadows to create the "card" effect */
+            overflow-y: auto;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            position: sticky;
+            top: 0;
+            float: right;
+            height: 100vh;
+            width: 50%;
+        }
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        /* Add some padding inside the card container */
+        .container {
+            padding: 2px 16px;
         }
     </style>
 </head>
 <body onload="loadData({{ MOVIES }})">
 
 <table id="actors_table" class="actor_table">
-
 </table>
+<div class="card">
+    <div class="container">
+      <h1 style="font-weight: bold" id="actor_name">
+          Click on Actor to View Movies
+      </h1>
+      <ul id="movies">
+
+      </ul>
+    </div>
+</div>
 
 <script>
 
@@ -56,7 +91,19 @@
             row.appendChild(nameCell);
 
             row.onclick = function() {
-                console.log(row.firstChild.textContent);
+                const actorHeader = document.getElementById("actor_name");
+                actorHeader.textContent = row.firstChild.textContent + "'s Movies...";
+                const actorsMovies = document.getElementById("movies");
+                while(actorsMovies.firstChild) {
+                    actorsMovies.removeChild(actorsMovies.firstChild);
+                }
+                for(let i=0; i<data.length; ++i) {
+                    if(data[i].cast.includes(row.firstChild.textContent)) {
+                        const newMovie = document.createElement("li");
+                        newMovie.textContent = data[i].title;
+                        actorsMovies.appendChild(newMovie);
+                    }
+                }
             }
 
             table.appendChild(row);
