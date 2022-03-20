@@ -12,7 +12,7 @@ with codecs.open("static/data/movies.json", "r", encoding="utf-8") as moviesFile
 
 @app.route('/')
 def homePage():  # put application's code here
-    return render_template("Intro.html")
+    return render_template("Intro.html", MOVIES=data)
 
 
 @app.route('/Movie_Page.html')
