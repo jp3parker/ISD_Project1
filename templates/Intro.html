@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/data/Montserrat-Regular.ttf">
     <title>My Movie Database</title>
 </head>
-<body>
+<body     onload="counters({{ MOVIES }})">
     <div class="inner">
         <div class="logo_container">
             <img src="../static/images/MovieScreen.jpg" class="decoration_pic_left" alt="movie theatre image">
@@ -32,35 +32,38 @@
             <h3>Some statistics about the database:</h3>
             <ul>
                 <li>
-                    Total Number of Actors:
+                    Total Number of Movies: <p id="movie_count"></p>
                 </li>
-                <p id="actor_count"></p>
+
+                <li>
+                    Total Number of Actors: <p id="actor_count"></p>
+                </li>
+
                 <li>
                     Total Number of Movies in Each Genre:
                     <ul>
-                        <li>Comedy:</li>
-                        <li>Horror: </li>
-                        <li>Short: </li>
-                        <li>Documentary: </li>
-                        <li>Western: </li>
-                        <li>Adventure: </li>
-                        <li>Romance: </li>
-                        <li>Crime: </li>
-                        <li>Drama: </li>
-                        <li>Action: </li>
-                        <li>Animated: </li>
-                        <li>Historical: </li>
-                        <li>Biography: </li>
-                        <li>Fantasy: </li>
-                        <li>Silent: </li>
-                        <li>Sports: </li>
-                        <li>Thriller: </li>
-                        <li>War: </li>
-                        <li>Mystery: </li>
-                        <li>Animated: </li>
-                        <li>Science Fiction: </li>
-                        <li>Superhero: </li>
-                        <li>Musical: </li>
+                        <li>Comedy:</li> <p id="comedy_count"></p>
+                        <li>Horror: </li> <p id="horror_count"></p>
+                        <li>Short: </li> <p id="short_count"></p>
+                        <li>Documentary: </li> <p id="doc_count"></p>
+                        <li>Western: </li> <p id="west_count"></p>
+                        <li>Adventure: </li> <p id="adv_count"></p>
+                        <li>Romance: </li> <p id="rom_count"></p>
+                        <li>Crime: </li> <p id="crime_count"></p>
+                        <li>Drama: </li> <p id="drama_count"></p>
+                        <li>Action: </li> <p id="action_count"></p>
+                        <li>Historical: </li> <p id="hist_count"></p>
+                        <li>Biography: </li> <p id="bio_count"></p>
+                        <li>Fantasy: </li> <p id="fntsy_count"></p>
+                        <li>Silent: </li> <p id="silent_count"></p>
+                        <li>Sports: </li> <p id="sports_count"></p>
+                        <li>Thriller: </li> <p id="thrill_count"></p>
+                        <li>War: </li> <p id="war_count"></p>
+                        <li>Mystery: </li> <p id="myst_count"></p>
+                        <li>Animated: </li> <p id="anim_count"></p>
+                        <li>Science Fiction: </li> <p id="scifi_count"></p>
+                        <li>Superhero: </li> <p id="superhero_count"></p>
+                        <li>Musical: </li> <p id="musical_count"></p>
                     </ul>
             </ul>
         </div>
@@ -81,9 +84,114 @@
     </div>
 
     <script>
+    var actorcount = 0;
+    var comedycount = 0;
+    var horrorcount = 0;
+    var shortcount = 0;
+    var doccount = 0;
+    var westcount = 0;
+    var advcount = 0;
+    var romcount = 0;
+    var crimecount = 0;
+    var dramacount = 0;
+    var actioncount = 0;
+    var histcount = 0;
+    var biocount = 0;
+    var fntsycount = 0;
+    var silentcount = 0;
+    var sportscount = 0;
+    var thrillcount = 0;
+    var warcount = 0;
+    var mystcount = 0;
+    var animcount = 0;
+    var scificount = 0;
+    var superherocount = 0;
+    var musicalcount = 0;
+    var moviecount = 0;
 
-        var actors = 4+6;
-        document.getElementById("actor_count").innerHTML = actors;
+    let data = [];
+
+    function counters(movieData) {
+        data = movieData;
+        moviecount = data.length;
+        for(let i=0; i<data.length; ++i) {
+                actorcount += data[i].cast.length;
+
+                if (data[i].genres == "Comedy")
+                    comedycount++;
+                if (data[i].genres == "Horror")
+                    horrorcount++;
+                if (data[i].genres == "Short")
+                    shortcount++;
+                if (data[i].genres == "Documentary")
+                    doccount++;
+                if (data[i].genres == "Western")
+                    westcount++;
+                if (data[i].genres == "Adventure")
+                    advcount++;
+                if (data[i].genres == "Romance")
+                    romcount++;
+                if (data[i].genres == "Crime")
+                    crimecount++;
+                if (data[i].genres == "Drama")
+                    dramacount++;
+                if (data[i].genres == "Action")
+                    actioncount++;
+                if (data[i].genres == "Historical")
+                    histcount++;
+                if (data[i].genres == "Biography")
+                    biocount++;
+                if (data[i].genres == "Fantasy")
+                    fntsycount++;
+                if (data[i].genres == "Silent")
+                   silentcount++;
+                if (data[i].genres == "Sports")
+                    sportscount++;
+                if (data[i].genres == "Thriller")
+                    thrillcount++;
+                if (data[i].genres == "War")
+                    warcount++;
+                if (data[i].genres == "Mystery")
+                    mystcount++;
+                if (data[i].genres == "Animated")
+                    animcount++;
+                if (data[i].genres == "Science Fiction")
+                    scificount++;
+                if (data[i].genres == "Superhero")
+                    superherocount++;
+                if (data[i].genres == "Musical")
+                    musicalcount++;
+
+        }
+        document.getElementById("actor_count").innerHTML = actorcount;
+        document.getElementById("movie_count").innerHTML = moviecount;
+
+        document.getElementById("comedy_count").innerHTML = comedycount;
+        document.getElementById("horror_count").innerHTML = horrorcount;
+        document.getElementById("short_count").innerHTML = shortcount;
+        document.getElementById("doc_count").innerHTML = doccount;
+        document.getElementById("west_count").innerHTML = westcount;
+        document.getElementById("adv_count").innerHTML = advcount;
+        document.getElementById("rom_count").innerHTML = romcount;
+        document.getElementById("crime_count").innerHTML = crimecount;
+        document.getElementById("drama_count").innerHTML = dramacount;
+        document.getElementById("action_count").innerHTML = actioncount;
+        document.getElementById("hist_count").innerHTML = histcount;
+        document.getElementById("bio_count").innerHTML = biocount;
+        document.getElementById("fntsy_count").innerHTML = fntsycount;
+        document.getElementById("silent_count").innerHTML = silentcount;
+        document.getElementById("sports_count").innerHTML = sportscount;
+        document.getElementById("thrill_count").innerHTML = thrillcount;
+        document.getElementById("war_count").innerHTML = warcount;
+        document.getElementById("myst_count").innerHTML = mystcount;
+        document.getElementById("anim_count").innerHTML = animcount ;
+        document.getElementById("scifi_count").innerHTML = scificount;
+        document.getElementById("superhero_count").innerHTML = superherocount;
+        document.getElementById("musical_count").innerHTML = musicalcount;
+    }
+
+
+
     </script>
 </body>
 </html>
