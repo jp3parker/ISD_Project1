@@ -34,8 +34,27 @@
             padding: 2px 16px;
         }
     </style>
+    
 </head>
+<div>
+
+    <input id="search" onkeyup ="searchActors()"type="text" placeholder="search" value=""title="Search for an actor">
+    
+</div>
+    
+    
+
+
 <body onload="loadData({{ MOVIES }})">
+
+
+
+
+
+
+
+
+
 
 <table id="actors_table" class="actor_table">
 </table>
@@ -51,13 +70,14 @@
 </div>
 
 <script>
-
+    
     let data = [];
     let actors = [];
     function loadData(movieData) {
         data = movieData;
         for(let i=0; i<data.length; ++i) {
-            for(let j=0; j<data[i].cast.length; ++j) {
+               for( let j=0; j<data[i].cast.length; ++j ) {
+            
                 const index = actors.indexOf(data[i].cast[j]);
                 if(index == -1) { //not found
                     actors.push(data[i].cast[j]);
@@ -65,7 +85,7 @@
             }
         }
         actors.sort(compareActorNames);
-        showActors();
+       showActors();
     }
 
     function compareActorNames(name1, name2) {
@@ -113,9 +133,37 @@
         name.textContent = "Actors name:";
         row.appendChild(name);
         table.prepend(row);
+        
+    }
+//function searches for names of actors
+    function searchActors(){
+        console.log("working");
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        console.log(filter);
+        table = document.getElementById("actors_table");
+        tr = table.getElementsByTagName("tr");
+        //console.log(tr[0].innerText);
+        for(i = 0; i < tr.length; i++){
+            td = tr[i].getElementsByTagName("td")[0];
+            
+            if(td){
+                txtValue = td.textContent||td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+
+            }
+
+        }
+
+        
+
 
     }
-
 </script>
 
 </body>
